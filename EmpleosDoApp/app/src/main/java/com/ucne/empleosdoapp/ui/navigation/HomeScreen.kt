@@ -10,9 +10,13 @@ import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Info
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
+import androidx.compose.material3.NavigationBarItemColors
+import androidx.compose.material3.NavigationBarItemDefaults
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.NavHostController
@@ -20,6 +24,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import com.ucne.empleosdoapp.R
 import com.ucne.empleosdoapp.ui.categoria.CategoriaScreen
 import com.ucne.empleosdoapp.ui.categoria_list.CategoriaListScreen
 import com.ucne.empleosdoapp.ui.categoria_selected.CategoriaSelectedScreen
@@ -27,8 +32,8 @@ import com.ucne.empleosdoapp.ui.guardados.GuardadosListScreen
 import com.ucne.empleosdoapp.ui.informacion.InformacionScreen
 import com.ucne.empleosdoapp.ui.theme.EmpleosDoAppTheme
 
-val ColorPri = Color(0xFF8E1DFF)
-val ColorSec = Color(0xFFB56BFF)
+val colorPri = Color(0xFF8E1DFF)
+val colorSec = Color(0xFFB56BFF)
 
 @Composable
 fun HomeScreen() {
@@ -99,21 +104,28 @@ fun BarraNavegacion(
     val currentDestination = navBackStackEntry?.destination
 
     val nombres = listOf("Home", "Guardados", "Info")
-    val icons = listOf(Icons.Filled.Home, Icons.Filled.Favorite, Icons.Filled.Info)
+    val icons = listOf(R.drawable.home, R.drawable.guardado, R.drawable.info)
 
     NavigationBar(
-        containerColor = ColorPri,
-        contentColor = ColorSec,
+        containerColor = colorPri,
+        contentColor = colorSec,
         tonalElevation = 10.dp
     ) {
         items.forEachIndexed { index, screen ->
             NavigationBarItem(
-                icon = { Icon(icons[index], contentDescription = nombres[index], tint = Color.White) },
+                icon = {
+                    Icon(
+                        painter = painterResource(icons[index]),
+                        contentDescription = nombres[index],
+                        tint = Color.White
+                    )
+                },
                 label = {Text(nombres[index], color = Color.White)},
                 selected = currentDestination?.route == screen.route,
                 onClick = {
                     navController.navigate(screen.route)
-                }
+                },
+                colors = NavigationBarItemDefaults.colors(indicatorColor = colorSec)
             )
         }
     }

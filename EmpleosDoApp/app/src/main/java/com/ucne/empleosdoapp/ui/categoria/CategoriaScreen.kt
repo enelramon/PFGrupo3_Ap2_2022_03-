@@ -1,27 +1,48 @@
 package com.ucne.empleosdoapp.ui.categoria
 
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Scaffold
-import androidx.compose.material.Text
+import androidx.compose.foundation.layout.*
+import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.modifier.modifierLocalConsumer
-import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.unit.dp
 
 @Composable
 fun CategoriaScreen(
     onClickCategoriaList: () -> Unit,
     /*viewModel: CategoriaViewModel = hiltViewModel()*/
 ) {
-    Column(
-        modifier = Modifier.fillMaxSize(),
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Center
+    Scaffold(
+        topBar =  {
+            TopAppBar(
+                title = {
+                    Row(
+                        modifier = Modifier.fillMaxSize(),
+                        verticalAlignment = Alignment.CenterVertically,
+                        horizontalArrangement = Arrangement.Center
+                    ) {
+                        Text(text = "Categoria")
+                    }
+                },
+                elevation = 20.dp,
+                backgroundColor = Color.White
+            )
+        }
     ) {
-        Text("Un texto")
+        Column(
+            modifier = Modifier.fillMaxSize(),
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.Center
+        ) {
+            Card(
+                modifier = Modifier.size(30.dp, 40.dp),
+                elevation = 20.dp
+            ) {
+                
+            }
+        }
     }
 }
