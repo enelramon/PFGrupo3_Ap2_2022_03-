@@ -1,6 +1,9 @@
 package com.ucne.empleosdoapp.ui.navigation
 
 import android.annotation.SuppressLint
+import android.content.Context
+import android.net.ConnectivityManager
+import android.net.NetworkInfo
 import android.view.MotionEvent
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.foundation.layout.fillMaxSize
@@ -13,6 +16,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.pointer.pointerInteropFilter
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
@@ -22,6 +26,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.ucne.empleosdoapp.R
+import com.ucne.empleosdoapp.compruebaConexion
 import com.ucne.empleosdoapp.ui.categoria.CategoriaScreen
 import com.ucne.empleosdoapp.ui.categoria_list.CategoriaListScreen
 import com.ucne.empleosdoapp.ui.categoria_selected.CategoriaSelectedScreen
@@ -32,24 +37,49 @@ import com.ucne.empleosdoapp.ui.theme.ColorSec
 import com.ucne.empleosdoapp.ui.theme.EmpleosDoAppTheme
 
 @Composable
-fun HomeScreen() {
+fun HomeScreen(onClick: () -> Unit) {
     EmpleosDoAppTheme {
+
+
+        val context = LocalContext.current
         val navController = rememberNavController()
+        if (compruebaConexion(context)) {
+            val items = listOf(
+                Screen.CategoriaScreen,
+                Screen.GuardadosListScreen,
+                Screen.InformacionScreen
+            )
 
-        val items = listOf(
-            Screen.CategoriaScreen,
-            Screen.GuardadosListScreen,
-            Screen.InformacionScreen
-        )
-
-        Scaffold (
-            modifier = Modifier.fillMaxSize(),
-            backgroundColor = MaterialTheme.colors.background,
-            bottomBar = {
-                BarraNavegacion(items, navController)
+            Scaffold(
+                modifier = Modifier.fillMaxSize(),
+                backgroundColor = MaterialTheme.colors.background,
+                bottomBar = {
+                    BarraNavegacion(items, navController)
+                }
+            ) {
+                Menu(navController = navController)
             }
-        ) {
-            Menu(navController = navController)
+        }else{
+            NavHost(
+                navController = navController,
+                startDestination = Screen.ConexionScreen.route
+            ) {
+                composable(Screen.ConexionScreen.route) {
+                    ConexionScreen(
+
+                        onClick = { navController.navigate(Screen.HomeScreen.route) },
+
+
+
+
+                        )
+                }
+                composable(Screen.HomeScreen.route) {
+                    HomeScreen({ navController.navigateUp() })
+                }
+
+
+            }
         }
     }
 }
@@ -128,4 +158,19 @@ private fun BarraNavegacion(
             )
         }
     }
+}
+
+fun compruebaConexion(context: Context): Boolean {
+    var connected = false
+    val connec = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+
+    // Recupera todas las redes (tanto móviles como wifi)
+    val redes = connec.allNetworkInfo
+    for (i in redes.indices) {
+        // Si alguna red tiene conexión, se devuelve true
+        if (redes[i].state == NetworkInfo.State.CONNECTED) {
+            connected = true
+        }
+    }
+    return connected
 }

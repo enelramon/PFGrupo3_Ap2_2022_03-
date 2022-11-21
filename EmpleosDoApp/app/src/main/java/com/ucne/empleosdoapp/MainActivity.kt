@@ -11,9 +11,12 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.ucne.empleosdoapp.ui.navigation.ConexionScreen
 import com.ucne.empleosdoapp.ui.navigation.HomeScreen
+import com.ucne.empleosdoapp.ui.navigation.Screen
 import com.ucne.empleosdoapp.ui.theme.EmpleosDoAppTheme
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -25,19 +28,44 @@ class MainActivity : ComponentActivity() {
             EmpleosDoAppTheme {val context = LocalContext.current
                 val navController = rememberNavController()
                 if (compruebaConexion(context)) {
-                    Surface(
-                        modifier = Modifier.fillMaxSize(),
-                        color = MaterialTheme.colorScheme.background
+                    NavHost(
+                        navController = navController,
+                        startDestination = Screen.HomeScreen.route
                     ) {
-                        HomeScreen()
+                        composable(Screen.HomeScreen.route) {
+                            HomeScreen(
+
+                                onClick = { navController.navigate(Screen.HomeScreen.route) },
+
+
+
+
+                                )
+                        }
+                        composable(Screen.HomeScreen.route) {
+                            HomeScreen({ navController.navigateUp() })
+                        }
+
 
                     }
                 }else{
-                    Surface(
-                        modifier = Modifier.fillMaxSize(),
-                        color = MaterialTheme.colorScheme.background
+                    NavHost(
+                        navController = navController,
+                        startDestination = Screen.ConexionScreen.route
                     ) {
-                        ConexionScreen()
+                        composable(Screen.ConexionScreen.route) {
+                            ConexionScreen(
+
+                                onClick = { navController.navigate(Screen.HomeScreen.route) },
+
+
+
+
+                            )
+                        }
+                        composable(Screen.HomeScreen.route) {
+                            HomeScreen({ navController.navigateUp() })
+                        }
 
 
                     }
