@@ -34,7 +34,7 @@ import com.ucne.empleosdoapp.ui.theme.EmpleosDoAppTheme
 @Composable
 fun HomeScreen() {
     EmpleosDoAppTheme {
-        val navController = rememberNavController()
+        val navControllerMenu = rememberNavController()
 
         val items = listOf(
             Screen.CategoriaScreen,
@@ -46,10 +46,10 @@ fun HomeScreen() {
             modifier = Modifier.fillMaxSize(),
             backgroundColor = MaterialTheme.colors.background,
             bottomBar = {
-                BarraNavegacion(items, navController)
+                BarraNavegacion(items, navControllerMenu)
             }
         ) {
-            Menu(navController = navController)
+            Menu(navController = navControllerMenu)
         }
     }
 }

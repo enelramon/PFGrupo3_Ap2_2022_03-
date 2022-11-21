@@ -46,11 +46,6 @@ fun CategoriaScreen(
 }
 
 @Composable
-private fun Inicio() {
-
-}
-
-@Composable
 private fun MenuCard()
 {
 

@@ -15,6 +15,8 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
+import androidx.navigation.NavHostController
 import com.ucne.empleosdoapp.R
 import com.ucne.empleosdoapp.ui.theme.ColorPri
 import com.ucne.empleosdoapp.ui.theme.EmpleosDoAppTheme
