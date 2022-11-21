@@ -4,6 +4,9 @@ import com.ucne.empleosdoapp.data.remote.dto.EmpleoDto
 import retrofit2.http.*
 
 interface EmpleoApi {
-    @GET("/")
+    @GET("/Empleoscontrollers")
     suspend fun GetList(): List<EmpleoDto>
+
+    /*@GET("/Empleoscontrollers/${id}")
+    suspend fun GetEmpleo(): EmpleoDto*/
 }

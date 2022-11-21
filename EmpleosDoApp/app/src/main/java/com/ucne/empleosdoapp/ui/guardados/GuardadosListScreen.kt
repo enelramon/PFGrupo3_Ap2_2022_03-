@@ -30,7 +30,7 @@ fun GuardadosListScreen(
                         Text(text = "Guardados")
                     }
                 },
-                elevation = 20.dp,
+                elevation = 5.dp,
                 backgroundColor = Color.White
             )
         },
