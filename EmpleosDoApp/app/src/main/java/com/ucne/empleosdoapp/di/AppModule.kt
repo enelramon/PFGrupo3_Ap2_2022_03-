@@ -26,7 +26,7 @@ object AppModule {
     @Singleton
     @Provides
     fun provideVerboApi(moshi: Moshi): EmpleoApi {
-        val Base_Url = ""
+        val Base_Url = "http://www.empleosdoapi.somee.com/api"
         return Retrofit.Builder()
             .baseUrl(Base_Url)
             .addConverterFactory(MoshiConverterFactory.create(moshi))

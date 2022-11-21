@@ -1,6 +1,9 @@
 package com.ucne.empleosdoapp.ui.navigation
 
 import android.annotation.SuppressLint
+import android.os.Bundle
+import androidx.activity.ComponentActivity
+import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
 import androidx.compose.material.Text
@@ -13,7 +16,9 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.ucne.empleosdoapp.R
+import com.ucne.empleosdoapp.ui.theme.ColorPri
 import com.ucne.empleosdoapp.ui.theme.EmpleosDoAppTheme
+import dagger.hilt.android.AndroidEntryPoint
 
 @Composable
 fun SplashScreen() {
@@ -24,10 +29,10 @@ fun SplashScreen() {
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
-fun Inicio() {
+private fun Inicio() {
     Scaffold(
         modifier = Modifier.fillMaxSize(),
-        backgroundColor = Color(0xFF8E1DFF),
+        backgroundColor = ColorPri,
         bottomBar = {
             Column(
                 modifier = Modifier.fillMaxWidth(),
@@ -42,17 +47,22 @@ fun Inicio() {
             }
         }
     ) {
-        Column(
-            modifier = Modifier.fillMaxSize(),
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.Center
-        ) {
-            Icon(
-                painter = painterResource(R.drawable.logo),
-                contentDescription = null,
-                modifier = Modifier.size(220.dp),
-                tint = Color.White
-            )
-        }
+        Logo()
+    }
+}
+
+@Composable
+private fun Logo() {
+    Column(
+        modifier = Modifier.fillMaxSize(),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.Center
+    ) {
+        Icon(
+            painter = painterResource(R.drawable.logo),
+            contentDescription = null,
+            modifier = Modifier.size(220.dp),
+            tint = Color.White
+        )
     }
 }
