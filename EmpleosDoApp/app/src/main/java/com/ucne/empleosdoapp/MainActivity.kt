@@ -12,8 +12,6 @@ import androidx.compose.material3.Surface
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
-import androidx.navigation.NavController
-import androidx.navigation.NavHost
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -21,11 +19,6 @@ import androidx.navigation.compose.rememberNavController
 import com.google.accompanist.swiperefresh.SwipeRefresh
 import com.google.accompanist.swiperefresh.SwipeRefreshIndicator
 import com.google.accompanist.swiperefresh.rememberSwipeRefreshState
-import com.ucne.empleosdoapp.ui.categoria.CategoriaScreen
-import com.ucne.empleosdoapp.ui.categoria_list.CategoriaListScreen
-import com.ucne.empleosdoapp.ui.categoria_selected.CategoriaSelectedScreen
-import com.ucne.empleosdoapp.ui.guardados.GuardadosListScreen
-import com.ucne.empleosdoapp.ui.informacion.InformacionScreen
 import com.ucne.empleosdoapp.ui.navigation.ConexionScreen
 import com.ucne.empleosdoapp.ui.navigation.HomeScreen
 import com.ucne.empleosdoapp.ui.navigation.Screen

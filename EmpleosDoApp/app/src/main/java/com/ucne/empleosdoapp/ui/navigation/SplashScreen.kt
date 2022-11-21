@@ -1,9 +1,6 @@
 package com.ucne.empleosdoapp.ui.navigation
 
 import android.annotation.SuppressLint
-import android.os.Bundle
-import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
 import androidx.compose.material.Text
@@ -15,12 +12,9 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.navigation.NavController
-import androidx.navigation.NavHostController
 import com.ucne.empleosdoapp.R
 import com.ucne.empleosdoapp.ui.theme.ColorPri
 import com.ucne.empleosdoapp.ui.theme.EmpleosDoAppTheme
-import dagger.hilt.android.AndroidEntryPoint
 
 @Composable
 fun SplashScreen() {
