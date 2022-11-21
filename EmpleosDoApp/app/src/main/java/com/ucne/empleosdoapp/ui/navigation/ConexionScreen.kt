@@ -32,15 +32,19 @@ import com.ucne.empleosdoapp.ui.theme.EmpleosDoAppTheme
 import okhttp3.internal.wait
 
 @Composable
-fun ConexionScreen() {
+fun ConexionScreen(
+    onClick: () -> Unit
+) {
     EmpleosDoAppTheme {
-        Inicio()
+        Inicio(onClick)
     }
 }
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
-private fun Inicio() {
+private fun Inicio(
+    onClick: () -> Unit
+) {
     Scaffold(
         modifier = Modifier.fillMaxSize(),
         backgroundColor = Color.White
@@ -60,14 +64,12 @@ private fun Inicio() {
             Spacer(modifier = Modifier.padding(5.dp))
             Text(text = "No hay internet, comprueba tu conexión.")
             Spacer(modifier = Modifier.padding(15.dp))
-            /*Button(
-                onClick = {
-                          navController.navigate(Screen.InicioMain.route)
-                },
+            Button(
+                onClick = onClick,
                 shape = RoundedCornerShape(20)
             ) {
                 Text(text = "Intentar nuevamente", color = Color.White)
-            }*/
+            }
         }
     }
 }

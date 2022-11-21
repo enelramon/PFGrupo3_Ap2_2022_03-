@@ -32,8 +32,9 @@ import com.ucne.empleosdoapp.ui.theme.ColorSec
 import com.ucne.empleosdoapp.ui.theme.EmpleosDoAppTheme
 
 @Composable
-fun HomeScreen() {
+fun HomeScreen(navController: NavController) {
     EmpleosDoAppTheme {
+        navController.popBackStack()
         val navControllerMenu = rememberNavController()
 
         val items = listOf(

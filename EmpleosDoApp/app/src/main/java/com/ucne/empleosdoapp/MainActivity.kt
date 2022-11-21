@@ -13,12 +13,22 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.navigation.NavController
+import androidx.navigation.NavHost
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.google.accompanist.swiperefresh.SwipeRefresh
 import com.google.accompanist.swiperefresh.SwipeRefreshIndicator
 import com.google.accompanist.swiperefresh.rememberSwipeRefreshState
+import com.ucne.empleosdoapp.ui.categoria.CategoriaScreen
+import com.ucne.empleosdoapp.ui.categoria_list.CategoriaListScreen
+import com.ucne.empleosdoapp.ui.categoria_selected.CategoriaSelectedScreen
+import com.ucne.empleosdoapp.ui.guardados.GuardadosListScreen
+import com.ucne.empleosdoapp.ui.informacion.InformacionScreen
 import com.ucne.empleosdoapp.ui.navigation.ConexionScreen
 import com.ucne.empleosdoapp.ui.navigation.HomeScreen
+import com.ucne.empleosdoapp.ui.navigation.Screen
 import com.ucne.empleosdoapp.ui.theme.ColorPri
 import com.ucne.empleosdoapp.ui.theme.EmpleosDoAppTheme
 import dagger.hilt.android.AndroidEntryPoint
@@ -59,19 +69,39 @@ class MainActivity : ComponentActivity() {
 @Composable
 private fun InicioMain() {
     val context = LocalContext.current
+    val navController = rememberNavController()
+
     if (compruebaConexion(context)) {
         Surface(
             modifier = Modifier.fillMaxSize(),
             color = MaterialTheme.colorScheme.background
         ) {
-            HomeScreen()
+            HomeScreen(navController)
         }
-    }else{
+    } else {
         Surface(
             modifier = Modifier.fillMaxSize(),
             color = MaterialTheme.colorScheme.background
         ) {
-            ConexionScreen()
+            NavConexion(navController)
+        }
+    }
+}
+
+@Composable
+private fun NavConexion(navController: NavHostController) {
+    NavHost(
+        navController = navController,
+        startDestination = Screen.ConexionScreen.route
+    ) {
+        composable(Screen.ConexionScreen.route){
+            ConexionScreen(
+                onClick = { navController.navigate(Screen.InicioMain.route) }
+            )
+        }
+
+        composable(Screen.InicioMain.route){
+            InicioMain()
         }
     }
 }
