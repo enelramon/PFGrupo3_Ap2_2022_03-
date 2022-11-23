@@ -32,12 +32,13 @@ fun GuardadosListScreen(
                         verticalAlignment = Alignment.CenterVertically,
                         horizontalArrangement = Arrangement.Center
                     ) {
-                        Text(text = "Guardados")
+                        Text(text = "Guardados", fontSize = 16.sp)
                     }
                 },
-                elevation = 5.dp,
+                elevation = 2.dp,
                 backgroundColor = Color.White
             )
+
         },
         modifier = Modifier.fillMaxSize(),
         backgroundColor = MaterialTheme.colors.background
@@ -47,7 +48,7 @@ fun GuardadosListScreen(
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center
         ) {
-            Text("Prueba")
+            Text("Próximamente", fontSize = 18.sp)
         }
     }
 }
