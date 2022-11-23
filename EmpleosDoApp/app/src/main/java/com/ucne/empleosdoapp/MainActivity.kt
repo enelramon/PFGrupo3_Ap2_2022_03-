@@ -87,13 +87,14 @@ private fun NavConexion(navController: NavHostController) {
         navController = navController,
         startDestination = Screen.ConexionScreen.route
     ) {
-        composable(Screen.ConexionScreen.route){
+
+        composable(Screen.ConexionScreen.route) {
             ConexionScreen(
                 onClick = { navController.navigate(Screen.InicioMain.route) }
             )
         }
 
-        composable(Screen.InicioMain.route){
+        composable(Screen.InicioMain.route) {
             InicioMain()
         }
     }

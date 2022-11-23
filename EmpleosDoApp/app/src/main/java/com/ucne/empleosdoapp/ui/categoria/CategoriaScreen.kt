@@ -1,10 +1,10 @@
 package com.ucne.empleosdoapp.ui.categoria
 
-import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.itemsIndexed
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -39,14 +39,15 @@ fun CategoriaScreen(
             )
         }
     ) {
-        MenuCard()
+        MenuCard(onClickCategoriaList)
     }
 }
 
 @Composable
-private fun MenuCard()
+private fun MenuCard(
+    onClickCategoriaList: () -> Unit
+)
 {
-
     val opcionesIcon = listOf(
         R.drawable.desarrollo,
         R.drawable.basededatos,
@@ -68,32 +69,42 @@ private fun MenuCard()
             .fillMaxSize()
     ){
         itemsIndexed(opcionesIcon) { index, opcion ->
-            CardCategoria(idIcon = opcion, text = opcionesTexto[index])
+            CardCategoria(idIcon = opcion, text = opcionesTexto[index], onClickCategoriaList)
         }
     }
 }
 
 @Composable
-private fun CardCategoria(idIcon: Int, text: String) {
-    Card(
-        modifier = Modifier
-            .fillMaxSize()
+private fun CardCategoria(
+    idIcon: Int, 
+    text: String,
+    onClickCategoriaList: () -> Unit
+) {
+    IconButton(
+        onClick = onClickCategoriaList,
+        modifier = Modifier.fillMaxSize()
             .height(160.dp)
-            .padding(4.dp, 5.dp),
-        elevation = 2.dp,
-        border = BorderStroke(50.dp, Color.Transparent)
+            .padding(5.dp),
     ) {
-        Column(
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.Center
+        Card(
+            modifier = Modifier
+                .fillMaxSize()
+                .height(160.dp),
+            elevation = 2.dp,
+            shape = RoundedCornerShape(10)
         ) {
-            Icon(
-                painter = painterResource(idIcon),
-                contentDescription = null,
-                tint = ColorPri
-            )
-            Spacer(modifier = Modifier.padding(5.dp))
-            Text(text = text)
+            Column(
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.Center
+            ) {
+                Icon(
+                    painter = painterResource(idIcon),
+                    contentDescription = null,
+                    tint = ColorPri
+                )
+                Spacer(modifier = Modifier.padding(5.dp))
+                Text(text = text)
+            }
         }
     }
 }
