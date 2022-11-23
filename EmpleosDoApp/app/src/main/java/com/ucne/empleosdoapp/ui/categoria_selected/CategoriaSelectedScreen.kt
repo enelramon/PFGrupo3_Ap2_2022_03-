@@ -108,8 +108,8 @@ private fun Banner() {
         ) {
             Card(
                 modifier = Modifier.size(90.dp),
-                border = BorderStroke(5.dp, Color.White),
-                shape = RoundedCornerShape(25.dp),
+                border = BorderStroke(3.dp, Color.White),
+                shape = RoundedCornerShape(35.dp),
                 backgroundColor = Color.Blue
             ) {
 
@@ -130,7 +130,7 @@ private fun VacanteTitulo() {
             text = "Consultor de Implementacion y producto",
             fontWeight = FontWeight.Black,
             textAlign = TextAlign.Center,
-            fontSize = 20.sp,
+            fontSize = 18.sp,
             color = ColorPri
         )
     }
@@ -172,7 +172,7 @@ private fun InfoCard(idIcon: Int, text: String) {
             .width(110.dp)
             .height(70.dp)
             .padding(5.dp),
-        elevation = 5.dp
+        elevation = 2.dp
     ) {
         Column(
             horizontalAlignment = Alignment.CenterHorizontally,
@@ -195,11 +195,10 @@ private fun DescripcionRequisito() {
         modifier = Modifier.padding(4.dp, 0.dp),
         horizontalAlignment = Alignment.Start
     ) {
-        Text(text = "Descripcion del puesto:\n", fontWeight = FontWeight.Black)
-        Text(text = "Es una app que permite ver empleos relacionados al área de tecnología, disponibles en república dominicana.\n")
-
-        Text(text = "Requisitos:\n", fontWeight = FontWeight.Black)
-        Text(text = "Es una app que permite ver empleos relacionados al área de tecnología, disponibles en república dominicana.\n")
+        Text(text = "Descripcion del puesto:", fontWeight = FontWeight.Black, fontSize = 14.sp)
+        Text(text = "Responsable local del conocimiento funcional general, versión comercial para los procesos logísticos desarrollados en la distribuidora, a su vez el conocimiento del desempeño del WMS (Warehouse Management System).\n", fontSize = 12.sp)
+        Text(text = "Requisitos:", fontWeight = FontWeight.Black, fontSize = 14.sp)
+        Text(text = "Estudiante de termino de ingeniería en sistemas, software o carreras afines.\n", fontSize = 12.sp)
     }
 }
 
