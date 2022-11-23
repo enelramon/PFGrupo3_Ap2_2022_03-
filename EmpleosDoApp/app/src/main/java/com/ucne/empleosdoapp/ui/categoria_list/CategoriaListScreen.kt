@@ -38,7 +38,7 @@ fun CategoriaListScreen(
                         Text(text = "Tipo seleccionado", fontSize = 16.sp)
                     }
                 },
-                elevation = 5.dp,
+                elevation = 2.dp,
                 backgroundColor = Color.White
             )
 
@@ -60,7 +60,7 @@ fun CategoriaListScreen(
         Column(modifier = Modifier
             .fillMaxSize()
         ) {
-            Spacer(modifier = Modifier.height(15.dp))
+            Spacer(modifier = Modifier.height(2.dp))
             CategoriaList(
                 /*empleos = uiState.empleos,*/
                 modifier = Modifier
@@ -97,13 +97,13 @@ private fun SelectedCard(
         onClick = onClickSelected,
         modifier = Modifier
             .fillMaxWidth()
-            .height(100.dp)
+            .height(130.dp)
             .padding(5.dp, 0.dp)
     ) {
         Card(
             modifier = Modifier
                 .fillMaxSize(),
-            elevation = 5.dp
+            elevation = 2.dp
         ) {
             Row(
                 modifier = Modifier.fillMaxSize()
@@ -111,7 +111,7 @@ private fun SelectedCard(
                 Card(
                     modifier = Modifier
                         .fillMaxHeight()
-                        .width(100.dp),
+                        .width(130.dp),
                     backgroundColor = Color.Blue
                 ) {}
                 Spacer(modifier = Modifier.padding(3.dp, 0.dp))
@@ -123,29 +123,32 @@ private fun SelectedCard(
                         text = "Consultor de Implementacion y producto",
                         fontWeight = FontWeight.Black,
                         textAlign = TextAlign.Left,
-                        fontSize = 15.sp,
+                        fontSize = 14.sp,
                         color = ColorPri
                     )
                     Text(
-                        text = "Una empresa mas",
+                        text = "WWT Company",
                         textAlign = TextAlign.Left,
-                        fontSize = 10.sp
+                        fontSize = 12.sp
                     )
                     Text(
                         text = "Remoto",
                         textAlign = TextAlign.Left,
-                        fontSize = 10.sp
+                        fontSize = 12.sp
                     )
                     Text(
                         text = "Tiempo completo",
-                        textAlign = TextAlign.Left,
-                        fontSize = 10.sp
+                        fontSize = 12.sp
                     )
                     Row(
                         Modifier.fillMaxSize(),
-                        verticalAlignment = Alignment.Bottom,
-                        horizontalArrangement = Arrangement.End
+                        horizontalArrangement = Arrangement.SpaceBetween,
+                        verticalAlignment = Alignment.CenterVertically
                     ) {
+                        Column() {
+
+                            Text(text = "Santiago - 21/11/2022", fontSize = 10.sp)
+                        }
                         IconButton(onClick = { /*TODO*/ }) {
                             Icon(
                                 modifier = Modifier.size(30.dp),
