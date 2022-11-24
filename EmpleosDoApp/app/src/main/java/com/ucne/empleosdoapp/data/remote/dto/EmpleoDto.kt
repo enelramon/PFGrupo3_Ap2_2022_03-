@@ -6,10 +6,12 @@ data class EmpleoDto(
     val NombreEmpresa: String,
     val Informacion: String,
     val Requisitos: String,
+    val LogoEmpresa: String,
     val Modalidad: String,
     val Tipo: String,
     val Salario: Double,
     val PaginaWeb: String,
-    val FechaPublicacion: Int,
+    val Ubicacion: String,
+    val FechaPublicacion: String,
     val Area: String
 )

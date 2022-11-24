@@ -7,6 +7,6 @@ interface EmpleoApi {
     @GET("/Empleoscontrollers")
     suspend fun GetList(): List<EmpleoDto>
 
-    /*@GET("/Empleoscontrollers/${id}")
-    suspend fun GetEmpleo(): EmpleoDto*/
+    @GET("/Empleoscontrollers/{id}")
+    suspend fun GetEmpleo(@Path("id") id: Int): EmpleoDto
 }

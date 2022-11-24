@@ -10,6 +10,9 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -19,21 +22,24 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.ucne.empleosdoapp.R
+import com.ucne.empleosdoapp.ui.categoria_list.CategoriaListViewModel
 import com.ucne.empleosdoapp.ui.theme.ColorPri
-import com.ucne.empleosdoapp.ui.theme.EmpleosDoAppTheme
 
 @Composable
 fun CategoriaSelectedScreen(
+    id: Int = 0,
+    viewModel: CategoriaSelectedViewModel = hiltViewModel(),
     onNavigateBack: () -> Unit
 ) {
-    Inicio(onNavigateBack)
-}
+    remember {
+        viewModel.getById(id)
+        0
+    }
 
-@Composable
-private fun Inicio(
-    onNavigateBack: () -> Unit
-) {
+    val uiState by viewModel.uiState.collectAsState()
+
     Scaffold(
         topBar = {
             TopAppBar(

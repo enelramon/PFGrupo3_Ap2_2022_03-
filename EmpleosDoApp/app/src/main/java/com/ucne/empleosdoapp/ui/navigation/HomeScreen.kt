@@ -15,10 +15,12 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.NavHostController
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navArgument
 import com.ucne.empleosdoapp.R
 import com.ucne.empleosdoapp.ui.categoria.CategoriaScreen
 import com.ucne.empleosdoapp.ui.categoria_list.CategoriaListScreen
@@ -67,13 +69,17 @@ private fun Menu(navController: NavHostController) {
 
         composable(Screen.CategoriaListScreen.route){
             CategoriaListScreen(
-                onClickSelected = { navController.navigate(Screen.CategoriaSelectedScreen.route) },
                 onNavigateBack = { navController.navigateUp() }
-            )
+            ){
+                navController.navigate(Screen.CategoriaSelectedScreen.route + "/$it")
+            }
         }
 
-        composable(Screen.CategoriaSelectedScreen.route){
-            CategoriaSelectedScreen({ navController.navigateUp() })
+        composable(
+            Screen.CategoriaSelectedScreen.route + "/{id}", arguments = listOf(navArgument("id"){NavType.IntType})
+        ){
+            val id = it.arguments?.getInt("id")?:0
+            CategoriaSelectedScreen(id, ){ navController.navigateUp() }
         }
 
         composable(Screen.GuardadosListScreen.route){

@@ -22,9 +22,9 @@ import com.ucne.empleosdoapp.ui.theme.ColorPri
 
 @Composable
 fun CategoriaListScreen(
-    onClickSelected: () -> Unit,
     onNavigateBack: () -> Unit,
-    /*viewModel: CategoriaListViewModel = hiltViewModel()*/
+    viewModel: CategoriaListViewModel = hiltViewModel(),
+    onClickSelected: (Int) -> Unit
 ) {
     Scaffold(
         topBar = {
@@ -55,46 +55,44 @@ fun CategoriaListScreen(
             }
         }
     ) {
-        /*val uiState by viewModel.uiState.collectAsState()*/
+        val uiState by viewModel.uiState.collectAsState()
 
         Column(modifier = Modifier
             .fillMaxSize()
         ) {
             Spacer(modifier = Modifier.height(2.dp))
             CategoriaList(
-                /*empleos = uiState.empleos,*/
+                empleos = uiState.empleos,
                 modifier = Modifier
-                    .fillMaxSize(),
-                onClickSelected
-            )
+                    .fillMaxSize()
+            ){
+                onClickSelected(it)
+            }
         }
     }
 }
 
 @Composable
 private fun CategoriaList(
-    /*empleos: List<EmpleoDto>,*/
+    empleos: List<EmpleoDto>,
     modifier: Modifier = Modifier,
-    onClickSelected: () -> Unit
+    onClickSelected: (Int) -> Unit
 ) {
     LazyColumn(modifier = modifier) {
-        /*items(empleos) { empleo ->
 
-        }*/
-
-        item {
-            SelectedCard(/*empleo = empleo*/ onClickSelected)
+        items(empleos) { empleo ->
+            SelectedCard(empleo = empleo, onClickSelected = {onClickSelected(empleo.Id)})
         }
     }
 }
 
 @Composable
 private fun SelectedCard(
-    /*empleo: EmpleoDto*/
-    onClickSelected: () -> Unit
+    empleo: EmpleoDto,
+    onClickSelected: (Int) -> Unit
 ) {
     IconButton(
-        onClick = onClickSelected,
+        onClick = { onClickSelected(empleo.Id) },
         modifier = Modifier
             .fillMaxWidth()
             .height(130.dp)
@@ -120,24 +118,24 @@ private fun SelectedCard(
                         .fillMaxSize(),
                 ) {
                     Text(
-                        text = "Consultor de Implementacion y producto",
+                        text = empleo.NombreVacante,
                         fontWeight = FontWeight.Black,
                         textAlign = TextAlign.Left,
                         fontSize = 14.sp,
                         color = ColorPri
                     )
                     Text(
-                        text = "WWT Company",
+                        text = empleo.NombreEmpresa,
                         textAlign = TextAlign.Left,
                         fontSize = 12.sp
                     )
                     Text(
-                        text = "Remoto",
+                        text = empleo.Tipo,
                         textAlign = TextAlign.Left,
                         fontSize = 12.sp
                     )
                     Text(
-                        text = "Tiempo completo",
+                        text = empleo.Modalidad,
                         fontSize = 12.sp
                     )
                     Row(
@@ -147,7 +145,7 @@ private fun SelectedCard(
                     ) {
                         Column() {
 
-                            Text(text = "Santiago - 21/11/2022", fontSize = 10.sp)
+                            Text(text = empleo.Ubicacion + " - " + empleo.FechaPublicacion, fontSize = 10.sp)
                         }
                         IconButton(onClick = { /*TODO*/ }) {
                             Icon(

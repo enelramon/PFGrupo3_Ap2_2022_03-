@@ -9,8 +9,15 @@ class EmpleoRepository @Inject constructor(
 ) {
     suspend fun getListEmpleos(): List<EmpleoDto> {
         try {
-            val api = empleo.GetList()
-            return api
+            return empleo.GetList()
+        } catch (e: Exception) {
+            throw e
+        }
+    }
+
+    suspend fun getEmpleo(id: Int): EmpleoDto {
+        try {
+            return empleo.GetEmpleo(id = id)
         } catch (e: Exception) {
             throw e
         }
