@@ -81,7 +81,7 @@ private fun CategoriaList(
     LazyColumn(modifier = modifier) {
 
         items(empleos) { empleo ->
-            SelectedCard(empleo = empleo, onClickSelected = {onClickSelected(empleo.Id)})
+            SelectedCard(empleo = empleo, onClickSelected = {onClickSelected(empleo.id)})
         }
     }
 }
@@ -92,7 +92,7 @@ private fun SelectedCard(
     onClickSelected: (Int) -> Unit
 ) {
     IconButton(
-        onClick = { onClickSelected(empleo.Id) },
+        onClick = { onClickSelected(empleo.id) },
         modifier = Modifier
             .fillMaxWidth()
             .height(130.dp)
@@ -118,24 +118,24 @@ private fun SelectedCard(
                         .fillMaxSize(),
                 ) {
                     Text(
-                        text = empleo.NombreVacante,
+                        text = empleo.nombreVacante,
                         fontWeight = FontWeight.Black,
                         textAlign = TextAlign.Left,
                         fontSize = 14.sp,
                         color = ColorPri
                     )
                     Text(
-                        text = empleo.NombreEmpresa,
+                        text = empleo.nombreEmpresa,
                         textAlign = TextAlign.Left,
                         fontSize = 12.sp
                     )
                     Text(
-                        text = empleo.Tipo,
+                        text = empleo.tipo,
                         textAlign = TextAlign.Left,
                         fontSize = 12.sp
                     )
                     Text(
-                        text = empleo.Modalidad,
+                        text = empleo.modalida,
                         fontSize = 12.sp
                     )
                     Row(
@@ -145,7 +145,7 @@ private fun SelectedCard(
                     ) {
                         Column() {
 
-                            Text(text = empleo.Ubicacion + " - " + empleo.FechaPublicacion, fontSize = 10.sp)
+                            Text(text = empleo.ubicacion + " - " + empleo.fechaPublicacion, fontSize = 10.sp)
                         }
                         IconButton(onClick = { /*TODO*/ }) {
                             Icon(
