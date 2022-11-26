@@ -13,14 +13,12 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.hilt.navigation.compose.hiltViewModel
 import com.ucne.empleosdoapp.R
 import com.ucne.empleosdoapp.ui.theme.ColorPri
 
 @Composable
 fun CategoriaScreen(
-    onClickCategoriaList: () -> Unit,
-    /*viewModel: CategoriaViewModel = hiltViewModel()*/
+    onClickCategoriaList: () -> Unit
 ) {
     Scaffold(
         topBar =  {
@@ -46,8 +44,7 @@ fun CategoriaScreen(
 @Composable
 private fun MenuCard(
     onClickCategoriaList: () -> Unit
-)
-{
+) {
     val opcionesIcon = listOf(
         R.drawable.desarrollo,
         R.drawable.basededatos,
@@ -80,9 +77,11 @@ private fun CardCategoria(
     text: String,
     onClickCategoriaList: () -> Unit
 ) {
+
     IconButton(
         onClick = onClickCategoriaList,
-        modifier = Modifier.fillMaxSize()
+        modifier = Modifier
+            .fillMaxSize()
             .height(160.dp)
             .padding(5.dp),
     ) {
@@ -102,6 +101,7 @@ private fun CardCategoria(
                     contentDescription = null,
                     tint = ColorPri
                 )
+
                 Spacer(modifier = Modifier.padding(5.dp))
                 Text(text = text)
             }

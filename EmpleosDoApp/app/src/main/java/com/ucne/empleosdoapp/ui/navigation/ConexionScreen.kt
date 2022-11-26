@@ -48,10 +48,12 @@ private fun Inicio(
                 modifier = Modifier.size(150.dp),
                 tint = ColorPri
             )
+
             Text(text = "¡¡Ooops!!", fontSize = 30.sp, fontWeight = FontWeight.Black, color = ColorPri)
             Spacer(modifier = Modifier.padding(5.dp))
             Text(text = "No hay internet, comprueba tu conexión.")
             Spacer(modifier = Modifier.padding(15.dp))
+
             Button(
                 onClick = onClick,
                 shape = RoundedCornerShape(20)

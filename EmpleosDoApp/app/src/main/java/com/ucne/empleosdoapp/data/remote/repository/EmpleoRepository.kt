@@ -17,7 +17,7 @@ class EmpleoRepository @Inject constructor(
 
     suspend fun getEmpleo(id: Int): EmpleoDto {
         try {
-            return empleo.GetEmpleo(id = id)
+            return empleo.GetEmpleo(id)
         } catch (e: Exception) {
             throw e
         }

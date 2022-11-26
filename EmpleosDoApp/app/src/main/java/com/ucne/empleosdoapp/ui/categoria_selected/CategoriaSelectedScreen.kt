@@ -16,6 +16,8 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -23,9 +25,13 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
+import coil.compose.AsyncImage
+import coil.request.ImageRequest
 import com.ucne.empleosdoapp.R
+import com.ucne.empleosdoapp.data.remote.dto.EmpleoDto
 import com.ucne.empleosdoapp.ui.categoria_list.CategoriaListViewModel
 import com.ucne.empleosdoapp.ui.theme.ColorPri
+import java.lang.Double.toString
 
 @Composable
 fun CategoriaSelectedScreen(
@@ -71,20 +77,20 @@ fun CategoriaSelectedScreen(
     ) {
         Column {
             Spacer(modifier = Modifier.height(5.dp))
-            Banner()
+            Banner(uiState.empleo)
             Spacer(modifier = Modifier.height(10.dp))
-            VacanteTitulo()
+            VacanteTitulo(uiState.empleo)
             Spacer(modifier = Modifier.height(10.dp))
-            ExtraInfo()
+            ExtraInfo(uiState.empleo)
             Spacer(modifier = Modifier.height(10.dp))
-            DescripcionRequisito()
+            DescripcionRequisito(uiState.empleo)
             Botones()
         }
     }
 }
 
 @Composable
-private fun Banner() {
+private fun Banner(empleo: EmpleoDto) {
     Box(
         modifier = Modifier
             .fillMaxWidth()
@@ -115,17 +121,24 @@ private fun Banner() {
             Card(
                 modifier = Modifier.size(90.dp),
                 border = BorderStroke(3.dp, Color.White),
-                shape = RoundedCornerShape(35.dp),
-                backgroundColor = Color.Blue
+                shape = RoundedCornerShape(35.dp)
             ) {
-
+                AsyncImage(
+                    model = ImageRequest.Builder(LocalContext.current)
+                        .data(empleo.logoEmpresa)
+                        .crossfade(true)
+                        .build(),
+                    contentDescription = null,
+                    contentScale = ContentScale.Crop,
+                    modifier = Modifier.fillMaxSize()
+                )
             }
         }
     }
 }
 
 @Composable
-private fun VacanteTitulo() {
+private fun VacanteTitulo(empleo: EmpleoDto) {
     Column(
         modifier = Modifier
             .fillMaxWidth()
@@ -133,7 +146,7 @@ private fun VacanteTitulo() {
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Text(
-            text = "Consultor de Implementacion y producto",
+            text = empleo.nombreVacante,
             fontWeight = FontWeight.Black,
             textAlign = TextAlign.Center,
             fontSize = 18.sp,
@@ -143,27 +156,27 @@ private fun VacanteTitulo() {
 }
 
 @Composable
-private fun ExtraInfo() {
+private fun ExtraInfo(empleo: EmpleoDto) {
+
     val iconos = listOf(
         R.drawable.location,
         R.drawable.calendar,
         R.drawable.briefcase,
         R.drawable.clock,
-        R.drawable.money,
+        R.drawable.money
     )
 
     val textos = listOf(
-        "Santiago",
-        "21/11/2022",
-        "Remoto",
-        "Tiempo completo",
-        "20,000 DOP",
+        empleo.ubicacion,
+        empleo.fechaPublicacion,
+        empleo.tipo,
+        empleo.modalida,
+        toString(empleo.salario)
     )
 
     LazyVerticalGrid(
         GridCells.Adaptive(minSize = 110.dp),
-        modifier = Modifier
-            .fillMaxWidth()
+        modifier = Modifier.fillMaxWidth()
     ) {
         itemsIndexed(iconos) { index, icono ->
             InfoCard(idIcon = icono, text = textos[index])
@@ -190,21 +203,21 @@ private fun InfoCard(idIcon: Int, text: String) {
                 tint = ColorPri
             )
             Spacer(modifier = Modifier.padding(3.dp))
-            Text(text = text, fontWeight = FontWeight.Bold, fontSize = 10.sp)
+            Text(text = text, fontWeight = FontWeight.Bold, fontSize = 10.sp, textAlign = TextAlign.Center)
         }
     }
 }
 
 @Composable
-private fun DescripcionRequisito() {
+private fun DescripcionRequisito(empleo: EmpleoDto) {
     Column(
         modifier = Modifier.padding(4.dp, 0.dp),
         horizontalAlignment = Alignment.Start
     ) {
-        Text(text = "Descripcion del puesto:", fontWeight = FontWeight.Black, fontSize = 14.sp)
-        Text(text = "Responsable local del conocimiento funcional general, versión comercial para los procesos logísticos desarrollados en la distribuidora, a su vez el conocimiento del desempeño del WMS (Warehouse Management System).\n", fontSize = 12.sp)
+        Text(text = "Descripción del puesto:", fontWeight = FontWeight.Black, fontSize = 14.sp)
+        Text(text = "   " + empleo.informacionVacante + "\n", fontSize = 12.sp)
         Text(text = "Requisitos:", fontWeight = FontWeight.Black, fontSize = 14.sp)
-        Text(text = "Estudiante de termino de ingeniería en sistemas, software o carreras afines.\n", fontSize = 12.sp)
+        Text(text = "   " + empleo.requisitoVacante + "\n", fontSize = 12.sp)
     }
 }
 

@@ -1,17 +1,15 @@
 package com.ucne.empleosdoapp.ui.categoria_list
 
-import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.*
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
@@ -64,9 +62,8 @@ fun CategoriaListScreen(
     ) {
         val uiState by viewModel.uiState.collectAsState()
 
-        Column(modifier = Modifier
-            .fillMaxSize()
-        ) {
+        Column(modifier = Modifier.fillMaxSize()) {
+
             Spacer(modifier = Modifier.height(2.dp))
             CategoriaList(
                 empleos = uiState.empleos,
@@ -88,90 +85,85 @@ private fun CategoriaList(
     LazyColumn(modifier = modifier) {
 
         items(empleos) { empleo ->
-            SelectedCard(empleo = empleo, onClickSelected = {onClickSelected(empleo.id)})
+
+            IconButton(
+                onClick = { onClickSelected(empleo.id) },
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(130.dp)
+                    .padding(5.dp, 5.dp)
+            ) {
+                SelectedCard(empleo = empleo)
+            }
         }
     }
 }
 
 @Composable
 private fun SelectedCard(
-    empleo: EmpleoDto,
-    onClickSelected: (Int) -> Unit
+    empleo: EmpleoDto
 ) {
-    IconButton(
-        onClick = { onClickSelected(empleo.id) },
+    Card(
         modifier = Modifier
-            .fillMaxWidth()
-            .height(130.dp)
-            .padding(5.dp, 0.dp)
+            .fillMaxSize()
+            .height(130.dp),
+        elevation = 2.dp
     ) {
-        Card(
-            modifier = Modifier
-                .fillMaxSize(),
-            elevation = 2.dp
-        ) {
-            Row(
-                modifier = Modifier.fillMaxSize()
+        Row(modifier = Modifier.fillMaxSize()) {
+            Card(
+                modifier = Modifier
+                    .fillMaxHeight()
+                    .width(130.dp),
             ) {
-                Card(
-                    modifier = Modifier
-                        .fillMaxHeight()
-                        .width(130.dp),
+                AsyncImage(
+                    model = ImageRequest.Builder(LocalContext.current)
+                        .data(empleo.logoEmpresa)
+                        .crossfade(true)
+                        .build(),
+                    contentDescription = null,
+                    contentScale = ContentScale.Crop,
+                    modifier = Modifier.fillMaxSize()
+                )
+            }
 
-                ) {
-                    AsyncImage(
-                        model = ImageRequest.Builder(LocalContext.current)
-                            .data(empleo.logoEmpresa)
-                            .crossfade(true)
-                            .build(),
-                        contentDescription = null,
-                        contentScale = ContentScale.Crop,
-                        modifier = Modifier.fillMaxSize()
-                    )
-                }
-                Spacer(modifier = Modifier.padding(3.dp, 0.dp))
-                Column(
-                    modifier = Modifier
-                        .fillMaxSize(),
-                ) {
-                    Text(
-                        text = empleo.nombreVacante,
-                        fontWeight = FontWeight.Black,
-                        textAlign = TextAlign.Left,
-                        fontSize = 14.sp,
-                        color = ColorPri
-                    )
-                    Text(
-                        text = empleo.nombreEmpresa,
-                        textAlign = TextAlign.Left,
-                        fontSize = 12.sp
-                    )
-                    Text(
-                        text = empleo.tipo,
-                        textAlign = TextAlign.Left,
-                        fontSize = 12.sp
-                    )
-                    Text(
-                        text = empleo.modalida,
-                        fontSize = 12.sp
-                    )
-                    Row(
-                        Modifier.fillMaxSize(),
-                        horizontalArrangement = Arrangement.SpaceBetween,
-                        verticalAlignment = Alignment.CenterVertically
-                    ) {
-                        Column() {
+            Spacer(modifier = Modifier.padding(3.dp, 0.dp))
 
-                            Text(text = empleo.ubicacion + " - " + empleo.fechaPublicacion, fontSize = 10.sp)
-                        }
-                        IconButton(onClick = { /*TODO*/ }) {
-                            Icon(
-                                modifier = Modifier.size(30.dp),
-                                painter = painterResource(R.drawable.guardado),
-                                contentDescription = null,
-                                tint = ColorPri
-                            )
-                        }
+            Column(modifier = Modifier.fillMaxSize()) {
+                Text(
+                    text = empleo.nombreVacante,
+                    fontWeight = FontWeight.Black,
+                    textAlign = TextAlign.Left,
+                    fontSize = 14.sp,
+                    color = ColorPri
+                )
+                Text(
+                    text = empleo.nombreEmpresa,
+                    textAlign = TextAlign.Left,
+                    fontSize = 12.sp
+                )
+                Text(
+                    text = empleo.tipo,
+                    textAlign = TextAlign.Left,
+                    fontSize = 12.sp
+                )
+                Text(
+                    text = empleo.modalida,
+                    fontSize = 12.sp
+                )
+                Row(
+                    Modifier.fillMaxSize(),
+                    horizontalArrangement = Arrangement.SpaceBetween,
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    Text(text = empleo.ubicacion + " - " + empleo.fechaPublicacion, fontSize = 10.sp)
+
+                    IconButton(onClick = { /*TODO*/ }) {
+                        Icon(
+                            modifier = Modifier.size(30.dp),
+                            painter = painterResource(R.drawable.guardado),
+                            contentDescription = null,
+                            tint = ColorPri
+                        )
                     }
                 }
             }

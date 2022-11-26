@@ -70,16 +70,20 @@ private fun Menu(navController: NavHostController) {
         composable(Screen.CategoriaListScreen.route){
             CategoriaListScreen(
                 onNavigateBack = { navController.navigateUp() }
-            ){
+            ) {
                 navController.navigate(Screen.CategoriaSelectedScreen.route + "/$it")
             }
         }
 
         composable(
-            Screen.CategoriaSelectedScreen.route + "/{id}", arguments = listOf(navArgument("id"){NavType.IntType})
+            Screen.CategoriaSelectedScreen.route + "/{id}",
+            arguments = listOf(navArgument("id") {type = NavType.IntType })
         ){
-            val id = it.arguments?.getInt("id")?:0
-            CategoriaSelectedScreen(id, ){ navController.navigateUp() }
+            val id = it.arguments?.getInt("id") ?: 0
+            CategoriaSelectedScreen(
+                id = id,
+                onNavigateBack = { navController.navigateUp() }
+            )
         }
 
         composable(Screen.GuardadosListScreen.route){
@@ -105,8 +109,17 @@ private fun BarraNavegacion(
     val selected = remember { mutableStateOf(false) }
     val scale = animateFloatAsState(if (selected.value) 2f else 1f)
 
-    val nombres = listOf("Home", "Guardados", "Info")
-    val icons = listOf(R.drawable.home, R.drawable.guardado, R.drawable.info)
+    val nombres = listOf(
+        "Home",
+        "Guardados",
+        "Info"
+    )
+
+    val icons = listOf(
+        R.drawable.home,
+        R.drawable.guardado,
+        R.drawable.info
+    )
 
     NavigationBar(
         containerColor = ColorPri,
@@ -115,8 +128,7 @@ private fun BarraNavegacion(
     ) {
         items.forEachIndexed { index, screen ->
             NavigationBarItem(
-                modifier = Modifier
-                    .scale(scale.value),
+                modifier = Modifier.scale(scale.value),
                 icon = {
                     Icon(
                         painter = painterResource(icons[index]),
@@ -124,7 +136,7 @@ private fun BarraNavegacion(
                         tint = Color.White
                     )
                 },
-                label = {Text(nombres[index], color = Color.White)},
+                label = { Text(nombres[index], color = Color.White) },
                 selected = currentDestination?.route == screen.route,
                 onClick = {
                     navController.navigate(screen.route)
