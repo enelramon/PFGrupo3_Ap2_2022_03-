@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+https://go.microsoft.com/fwlink/?LinkID=208121.
+-->
+<Project>
+  <PropertyGroup>
+    <_PublishTargetUrl>C:\Users\Daniel\Documents\Programacion aplicada 2\EmpleosDoApi\bin\Release\net6.0\publish\</_PublishTargetUrl>
+    <History>True|2022-11-24T00:38:26.5971154Z;True|2022-11-23T19:27:24.4843340-05:00;True|2022-11-23T19:26:07.5745756-05:00;True|2022-11-23T18:44:16.6179551-05:00;True|2022-11-20T13:08:51.3734105-05:00;True|2022-11-20T13:02:05.1828625-05:00;True|2022-11-20T12:56:13.1175790-05:00;True|2022-11-20T12:05:33.0412087-05:00;</History>
+    <TimeStampOfAssociatedLegacyPublishXmlFile />
+  </PropertyGroup>
+  <ItemGroup>
+    <DestinationConnectionStrings Include="ConStr">
+      <Value>data source = DATA/EmpleosDoApiDB.db</Value>
+    </DestinationConnectionStrings>
+  </ItemGroup>
+</Project>
