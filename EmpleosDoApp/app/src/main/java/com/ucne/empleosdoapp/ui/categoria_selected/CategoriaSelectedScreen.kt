@@ -1,5 +1,7 @@
 package com.ucne.empleosdoapp.ui.categoria_selected
 
+import android.content.Intent
+import android.net.Uri
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.grid.GridCells
@@ -84,7 +86,7 @@ fun CategoriaSelectedScreen(
             ExtraInfo(uiState.empleo)
             Spacer(modifier = Modifier.height(10.dp))
             DescripcionRequisito(uiState.empleo)
-            Botones()
+            Botones(uiState.empleo)
         }
     }
 }
@@ -222,7 +224,8 @@ private fun DescripcionRequisito(empleo: EmpleoDto) {
 }
 
 @Composable
-private fun Botones() {
+private fun Botones(empleo: EmpleoDto) {
+    val context = LocalContext.current
     Row(
         modifier = Modifier
             .fillMaxWidth()
@@ -241,8 +244,13 @@ private fun Botones() {
         ) {
             Text(text = "Guardar", color = ColorPri)
         }
+
         Button(
-            onClick = { /*TODO*/ },
+            onClick = {
+                val uri: Uri= Uri.parse(empleo.paginaWeb)
+                val intent : Intent= Intent(Intent.ACTION_VIEW,uri)
+                context.startActivity(intent)
+            },
             modifier = Modifier
                 .width(195.dp)
                 .padding(2.dp, 0.dp)
